@@ -3,13 +3,13 @@ import { PALAVRAS } from './palavras.js';
 const board = document.querySelector('#board');
 const keys = document.querySelectorAll('#keyboard-container button');
 
-let vetTentativas = [[], [], [], [], [], []];
-let tentativa = 0;
-criaBoard();
+let vetAttempts = [[], [], [], [], [], []];
+let attempts = 0;
+createBoard();
 keyboardListener();
 
 
-function criaBoard () {
+function createBoard () {
     let id = 0;
     for (let i = 0; i < 6; i++) {
         let row = document.createElement('div');
@@ -36,18 +36,18 @@ function keyboardListener() {
         const code = event.code;
         console.log(key + "\t" + code);
         if (code.includes('Key')) {
-            updateGuessedWords(key);
-            console.log(vetTentativas);
+            updateAttempt(key);
+            console.log(vetAttempts);
             return;
         }
         if (code === 'Backspace') {
             console.log('del ' + getCurrentSquare());
-            handleDeleteLetter(getCurrentSquare() - 1);
+            deleteLetter(getCurrentSquare() - 1);
             return;
         }
         if (code === 'Enter') {
             console.log('enter');
-            handleSubmitWord();
+            SubmitAttempt();
             return;
         }
     });
@@ -58,46 +58,46 @@ function keyboardListener() {
       
             if (letter === "enter") {
                 console.log('enter');
-                handleSubmitWord();
+                SubmitAttempt();
                 return;
             }
       
             if (letter === "del") {
                 console.log('del ' + getCurrentSquare());
-                handleDeleteLetter(getCurrentSquare()-1);
+                deleteLetter(getCurrentSquare()-1);
                 return;
             }
             
             console.log(letter);
-            updateGuessedWords(letter);
+            updateAttempt(letter);
             return letter;
         };
     }
 }
 
-function handleSubmitWord() {
-    tentativa++;
+function SubmitAttempt() {
+    attempts++;
 }
 
-function handleDeleteLetter(index) {
+function deleteLetter(index) {
     if (index >= 0) {
-        const pointer = document.getElementById(`row-${tentativa}`);
+        const pointer = document.getElementById(`row-${attempts}`);
         pointer.children[index].innerHTML = '';
-        vetTentativas[tentativa].pop();
-        console.log(vetTentativas[tentativa]);
+        vetAttempts[attempts].pop();
+        console.log(vetAttempts[attempts]);
     }
 }
 
-function updateGuessedWords(letter) {
+function updateAttempt(letter) {
     if (getCurrentSquare() < 5) {
-        const pointer = document.getElementById(`row-${tentativa}`);
+        const pointer = document.getElementById(`row-${attempts}`);
         pointer.children[getCurrentSquare()].innerHTML = letter;
-        vetTentativas[tentativa].push(letter);
+        vetAttempts[attempts].push(letter);
         
     }
 }
 
 
 function getCurrentSquare() {
-    return vetTentativas[tentativa].length;
+    return vetAttempts[attempts].length;
 }
