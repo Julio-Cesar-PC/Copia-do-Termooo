@@ -59,6 +59,11 @@ main {
     user-select: none;
 }
 
+
+#keyboard-container {
+    width: 100%;
+}
+
 .keyboard-row {
     display: flex;
     justify-content: center;
