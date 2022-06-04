@@ -72,8 +72,17 @@ function keyboardListener() {
     }
 }
 
+function checkWord() {
+    const word = vetAttempts[attempts].join('');
+    console.log(word);
+    if (PALAVRAS.includes(word)) {
+        alert('Parabéns, você acertou!');
+        window.location.reload();
+    }
+}
+
 function submitAttempt() {
-    
+    checkWord();
     attempts++;
 }
 
