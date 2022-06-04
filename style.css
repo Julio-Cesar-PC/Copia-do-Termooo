@@ -1,0 +1,110 @@
+body {
+    background-color: rgb(110, 92, 98);
+}
+
+header {
+    color: rgb(250, 250, 255);
+    font-family: 'Mitr', sans-serif;
+    font-weight: 600;
+    font-size: 1em;
+    user-select: none;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5em;
+}
+
+#board {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    gap: 0.25em;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    gap: 0.25em;
+}
+
+.square {
+    font-family: 'Mitr', sans-serif;
+    font-weight: 400;
+    font-size: 2em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 0.125em solid #4C4347;
+    min-width: 55px;
+    min-height: 55px;
+    font-weight: bold;
+    color: gainsboro;
+    text-transform: uppercase;
+    background-color: transparent;
+}
+
+
+#keyboard-container {
+    width: 100%;
+}
+
+.keyboard-row {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin: 0 auto 8px;
+    touch-action: manipulation;
+}
+
+.keyboard-row button {
+    font-family: 'Mitr', sans-serif;
+    font-weight: 400;
+    font-size: 1em;
+    border: 0;
+    padding: 10px;
+    cursor: pointer;
+    background-color: #4C4347;
+    color: #FAFAFF;
+    flex-grow: 1;
+    text-transform: uppercase;
+    margin-right: 6px;
+    border-radius: 4px;
+    user-select: none;
+    min-width: 25px;
+    min-height: 25px;
+    max-width: 50px;
+    max-height: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.keyboard-row button.wide-button {
+    flex-grow: 2;
+    padding: 20px;
+    min-width: 50px;
+    min-height: 50px;
+    max-width: 100px;
+    max-height: 50px;
+}
+
+.spacer-half {
+    flex-grow: 0.5;
+}
