@@ -27,10 +27,7 @@ function createBoard () {
     }
 }
 
-console.log(document.getElementById('row-2').children[4].id);
-
 function keyboardListener() {
-    
     document.addEventListener('keydown', function(event) {
         const key = event.key;
         const code = event.code;
@@ -47,7 +44,7 @@ function keyboardListener() {
         }
         if (code === 'Enter') {
             console.log('enter');
-            SubmitAttempt();
+            submitAttempt();
             return;
         }
     });
@@ -58,7 +55,7 @@ function keyboardListener() {
       
             if (letter === "enter") {
                 console.log('enter');
-                SubmitAttempt();
+                submitAttempt();
                 return;
             }
       
@@ -75,7 +72,8 @@ function keyboardListener() {
     }
 }
 
-function SubmitAttempt() {
+function submitAttempt() {
+    
     attempts++;
 }
 
@@ -96,7 +94,6 @@ function updateAttempt(letter) {
         
     }
 }
-
 
 function getCurrentSquare() {
     return vetAttempts[attempts].length;
