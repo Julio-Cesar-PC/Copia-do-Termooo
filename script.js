@@ -1,3 +1,6 @@
+// Code by Julio Cesar P Cuencas
+// https://github.com/Julio-Cesar-PC
+
 import { PALAVRAS } from './palavras.js';
 
 const board = document.querySelector('#board');
@@ -7,6 +10,8 @@ let vetAttempts = [[], [], [], [], [], []];
 let attempts = 0;
 createBoard();
 keyboardListener();
+
+let dailyWord = ['t', 'e', 'r', 'm', 'o'];
 
 
 function createBoard () {
@@ -75,13 +80,35 @@ function keyboardListener() {
 function checkWord() {
     const word = vetAttempts[attempts].join('');
     console.log(word);
-    if (PALAVRAS.includes(word)) {
+    if (word === dailyWord.join('')) {
         alert('Parabéns, você acertou!');
-        window.location.reload();
+        //window.location.reload();
+    }
+}
+
+function getColor(attempt) {
+    const colorPallete = {
+        'colorRight': '#3aa394',
+        'colorPlace': '#d3ad69',
+        'colorWrong': '#312a2c'
+    }
+
+    for (let i = 0; i < 5; i++) {
+        console.log(i);
+        if (dailyWord.includes(attempt.join(''))) {
+            document.getElementById(i + (5*attempts)).style.backgroundColor = colorPallete.colorWrong;
+        }
+        if (dailyWord.includes(attempt[i])) {
+            document.getElementById(i + (5*attempts)).style.backgroundColor = colorPallete.colorPlace;
+        }
+        if (attempt[i] === dailyWord[i]) {
+            document.getElementById(i + (5*attempts)).style.backgroundColor = colorPallete.colorRight;
+        }
     }
 }
 
 function submitAttempt() {
+    getColor(vetAttempts[attempts]);
     checkWord();
     attempts++;
 }

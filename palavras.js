@@ -1,3 +1,6 @@
+// Code by Julio Cesar P Cuencas
+// https://github.com/Julio-Cesar-PC
+
 export const PALAVRAS = [
   "termo",
   "suíte",
