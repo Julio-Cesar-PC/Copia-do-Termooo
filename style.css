@@ -56,6 +56,7 @@ main {
     color: gainsboro;
     text-transform: uppercase;
     background-color: transparent;
+    user-select: none;
 }
 
 
@@ -73,7 +74,7 @@ main {
 
 .keyboard-row button {
     font-family: 'Mitr', sans-serif;
-    font-weight: 400;
+    font-weight: 600;
     font-size: 1em;
     border: 0;
     padding: 10px;
@@ -94,6 +95,10 @@ main {
     justify-content: center;
     align-items: center;
 
+}
+
+.keyboard-row button:hover {
+    background-color: #ffffff1a;
 }
 
 .keyboard-row button.wide-button {

@@ -34,6 +34,13 @@ function criaBoard () {
 }
 
 function keyboardListener() {
+    document.addEventListener('keydown', function(event) {
+        const key = event.key;
+        const code = event.code;
+        console.log(key + "\t" + code);
+        updateGuessedWords(key);
+        return key;
+    });
     for (let i = 0; i < keys.length; i++) {
         keys[i].onclick = ({ target }) => {
             const letter = target.getAttribute("data-key");
@@ -50,8 +57,11 @@ function keyboardListener() {
             }
       
             updateGuessedWords(letter);
+            console.log(letter);
+            return letter;
         };
     }
+
 }
 
 function updateGuessedWords(letter) {
@@ -61,8 +71,6 @@ function updateGuessedWords(letter) {
         point++;
     }
 }
-
-
 
 
 
