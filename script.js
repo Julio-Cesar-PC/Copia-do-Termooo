@@ -5,9 +5,9 @@ import { PALAVRAS } from './palavras.js';
 
 const keys = document.querySelectorAll('#keyboard-container button');
 
-const firstDay = new Date('2022-06-06');
-// console.log(firstDay);
+const firstDay = new Date('2022-06-06 00:00:00');
 const date = new Date();
+console.log(firstDay + '\n' + date + '\n' + ((date-firstDay)/(1000*60*60*24)));
 
 function getWord(date) {
     return PALAVRAS[Math.floor((date-firstDay)/(1000*60*60*24))];
