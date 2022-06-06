@@ -3,10 +3,9 @@
 
 import { PALAVRAS } from './palavras.js';
 
-const board = document.querySelector('#board');
 const keys = document.querySelectorAll('#keyboard-container button');
 
-const firstDay = new Date('2022-06-05');
+const firstDay = new Date('2022-06-06');
 // console.log(firstDay);
 const date = new Date();
 
@@ -18,7 +17,7 @@ function getWord(date) {
 
 let vetAttempts = [[], [], [], [], [], []];
 let attempts = 0;
-createBoard();
+
 keyboardListener();
 
 
@@ -28,23 +27,6 @@ function checkFinal() {
     if (attempts === 5) {
         alert('Game Over!');
         window.location.reload();
-    }
-}
-
-function createBoard () {
-    let id = 0;
-    for (let i = 0; i < 6; i++) {
-        let row = document.createElement('div');
-        row.id = 'row-' + i;
-        row.classList.add('row');
-        board.appendChild(row);
-        for (let j = 0; j < 5; j++) {
-            let square = document.createElement("div");
-            square.classList.add("square");
-            square.classList.add("animate__animated");
-            square.setAttribute("id", id++);
-            row.appendChild(square);
-        }   
     }
 }
 
