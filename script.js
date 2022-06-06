@@ -13,7 +13,7 @@ function getWord(date) {
     return PALAVRAS[Math.floor((date-firstDay)/(1000*60*60*24))];
 }
 
-// console.log(getWord(date));
+console.log(getWord(date));
 
 let vetAttempts = [[], [], [], [], [], []];
 let attempts = 0;
