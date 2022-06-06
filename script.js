@@ -7,7 +7,7 @@ const keys = document.querySelectorAll('#keyboard-container button');
 
 const firstDay = new Date('2022-06-06 00:00:00');
 const date = new Date();
-console.log(firstDay + '\n' + date + '\n' + ((date-firstDay)/(1000*60*60*24)));
+// console.log(firstDay + '\n' + date + '\n' + ((date-firstDay)/(1000*60*60*24)));
 
 function getWord(date) {
     return PALAVRAS[Math.floor((date-firstDay)/(1000*60*60*24))];
@@ -15,13 +15,13 @@ function getWord(date) {
 
 console.log(getWord(date));
 
+let dailyWord = getWord(date).split('');
 let vetAttempts = [[], [], [], [], [], []];
 let attempts = 0;
 
 keyboardListener();
 
 
-let dailyWord = getWord(date).split('');
 
 function checkFinal() {
     if (attempts === 5) {
@@ -150,7 +150,6 @@ function updateAttempt(letter) {
         const pointer = document.getElementById(`row-${attempts}`);
         pointer.children[getCurrentSquare()].innerHTML = letter;
         vetAttempts[attempts].push(letter);
-        
     }
 }
 
