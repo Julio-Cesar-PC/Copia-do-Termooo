@@ -101,21 +101,27 @@ function getColor(attempt) {
 
     for (let i = 0; i < 5; i++) {
         
-        for (let j = 0; j < word.length; j++) {
-            if (word.includes(attempt[i])) {
-                document.getElementById(i + (5*attempts)).style = `background-color:${colorPallete.colorPlace};border-color:${colorPallete.colorPlace}`;
-                word.splice(word.indexOf(attempt[i]), 1);
-                // console.log(word);
-            }
+        if (attempt[i] === dailyWord[i]) {
+            document.getElementById(i + (5*attempts)).style = `background-color:${colorPallete.colorRight};border-color:${colorPallete.colorRight}`;
+            word.splice(word.indexOf(attempt[i]), 1);
         }
+    }
+
+    for (let i = 0; i < 5; i++) {
+        
+        if (word.includes(attempt[i])) {
+            document.getElementById(i + (5*attempts)).style = `background-color:${colorPallete.colorPlace};border-color:${colorPallete.colorPlace}`;
+            word.splice(word.indexOf(attempt[i]), 1);
+        }
+
+    }
+
+    for (let i = 0; i < 5; i++) {
         
         if (!(dailyWord.includes(attempt[i]))) {
             document.getElementById(i + (5*attempts)).style = `background-color:${colorPallete.colorWrong};border-color:${colorPallete.colorWrong}`;
         }
 
-        if (attempt[i] === dailyWord[i]) {
-            document.getElementById(i + (5*attempts)).style = `background-color:${colorPallete.colorRight};border-color:${colorPallete.colorRight}`;
-        }
     }
 }
 
