@@ -6,13 +6,30 @@ import { PALAVRAS } from './palavras.js';
 const board = document.querySelector('#board');
 const keys = document.querySelectorAll('#keyboard-container button');
 
+const firstDay = new Date('2022-06-05');
+// console.log(firstDay);
+const date = new Date();
+
+function getWord(date) {
+    return PALAVRAS[Math.floor((date-firstDay)/(1000*60*60*24))];
+}
+
+// console.log(getWord(date));
+
 let vetAttempts = [[], [], [], [], [], []];
 let attempts = 0;
 createBoard();
 keyboardListener();
 
-let dailyWord = ['t', 'e', 'r', 'm', 'o'];
 
+let dailyWord = getWord(date).split('');
+
+function checkFinal() {
+    if (attempts === 5) {
+        alert('Game Over!');
+        window.location.reload();
+    }
+}
 
 function createBoard () {
     let id = 0;
@@ -27,8 +44,7 @@ function createBoard () {
             square.classList.add("animate__animated");
             square.setAttribute("id", id++);
             row.appendChild(square);
-        }
-        
+        }   
     }
 }
 
@@ -36,19 +52,19 @@ function keyboardListener() {
     document.addEventListener('keydown', function(event) {
         const key = event.key;
         const code = event.code;
-        console.log(key + "\t" + code);
+        // console.log(key + "\t" + code);
         if (code.includes('Key')) {
             updateAttempt(key);
-            console.log(vetAttempts);
+            // console.log(vetAttempts);
             return;
         }
         if (code === 'Backspace') {
-            console.log('del ' + getCurrentSquare());
+            // console.log('del ' + getCurrentSquare());
             deleteLetter(getCurrentSquare() - 1);
             return;
         }
         if (code === 'Enter') {
-            console.log('enter');
+            // console.log('enter');
             submitAttempt();
             return;
         }
@@ -59,18 +75,18 @@ function keyboardListener() {
             const letter = target.getAttribute("data-key");
       
             if (letter === "enter") {
-                console.log('enter');
+                // console.log('enter');
                 submitAttempt();
                 return;
             }
       
             if (letter === "del") {
-                console.log('del ' + getCurrentSquare());
+                // console.log('del ' + getCurrentSquare());
                 deleteLetter(getCurrentSquare()-1);
                 return;
             }
             
-            console.log(letter);
+            // console.log(letter);
             updateAttempt(letter);
             return letter;
         };
@@ -79,10 +95,10 @@ function keyboardListener() {
 
 function checkWord() {
     const word = vetAttempts[attempts].join('');
-    console.log(word);
+    // console.log(word);
     if (word === dailyWord.join('')) {
         alert('Parabéns, você acertou!');
-        //window.location.reload();
+        window.location.reload();
     }
 }
 
@@ -92,25 +108,44 @@ function getColor(attempt) {
         'colorPlace': '#d3ad69',
         'colorWrong': '#312a2c'
     }
+    
+    const word = [];
+
+    for (let i = 0; i < dailyWord.length; i++) {
+        word[i] = dailyWord[i];
+    }
+
+    // console.log(word + '\n' + dailyWord);
 
     for (let i = 0; i < 5; i++) {
-        console.log(i);
-        if (dailyWord.includes(attempt.join(''))) {
-            document.getElementById(i + (5*attempts)).style.backgroundColor = colorPallete.colorWrong;
+        
+        for (let j = 0; j < word.length; j++) {
+            if (word.includes(attempt[i])) {
+                document.getElementById(i + (5*attempts)).style = `background-color:${colorPallete.colorPlace};border-color:${colorPallete.colorPlace}`;
+                word.splice(word.indexOf(attempt[i]), 1);
+                // console.log(word);
+            }
         }
-        if (dailyWord.includes(attempt[i])) {
-            document.getElementById(i + (5*attempts)).style.backgroundColor = colorPallete.colorPlace;
+        
+        if (!(dailyWord.includes(attempt[i]))) {
+            document.getElementById(i + (5*attempts)).style = `background-color:${colorPallete.colorWrong};border-color:${colorPallete.colorWrong}`;
         }
+
         if (attempt[i] === dailyWord[i]) {
-            document.getElementById(i + (5*attempts)).style.backgroundColor = colorPallete.colorRight;
+            document.getElementById(i + (5*attempts)).style = `background-color:${colorPallete.colorRight};border-color:${colorPallete.colorRight}`;
         }
     }
 }
 
 function submitAttempt() {
-    getColor(vetAttempts[attempts]);
-    checkWord();
-    attempts++;
+    if (vetAttempts[attempts].length === 5) {
+        getColor(vetAttempts[attempts]);
+        checkWord();
+        checkFinal();
+        attempts++;
+    } else {
+        alert('Você precisa preencher todas as letras da palavra!');
+    }
 }
 
 function deleteLetter(index) {
@@ -118,7 +153,7 @@ function deleteLetter(index) {
         const pointer = document.getElementById(`row-${attempts}`);
         pointer.children[index].innerHTML = '';
         vetAttempts[attempts].pop();
-        console.log(vetAttempts[attempts]);
+        // console.log(vetAttempts[attempts]);
     }
 }
 
